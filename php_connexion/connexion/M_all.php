@@ -38,14 +38,14 @@ class M_all extends Connexion
     {
         try {
             $pdo = $this->getConnexion();
-            $query = $pdo->prepare("SELECT competences_professionnelles.id as id_comp, competences_professionnelles.nom, competences_professionnelles.description_courte, competences_professionnelles.description_long,
+            $query = $pdo->prepare("SELECT competences_professionnelles.id as id_comp, competences_professionnelles.nom, competences_professionnelles.description_courte as descrip, competences_professionnelles.description_long,
                                             activités_types.descrip_courte, activités_types.id as id_acti
                                     FROM `activités_types` LEFT JOIN  competences_professionnelles 
                                      ON activités_types.id = competences_professionnelles.id_type 
                                     WHERE competences_professionnelles.id_type = :id ");
             $query->bindParam(":id", $id);
             $query->execute();
-            return $query->fetchObject();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

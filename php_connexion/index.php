@@ -8,7 +8,6 @@ $listAll = $model->readAll();
 $id = filter_input(INPUT_GET, "id");
 $oneComp = $model->readOne($id);
 $activityAll = $model->readAllActivity(); 
-echo $id;
 $activity = $model->readOneActivity($id);
 
 $loc = filter_input(INPUT_GET, "loc");
